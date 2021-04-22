@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
     /// <summary>
@@ -11,7 +19,7 @@ namespace Net.Sf.Pkcs11.Objects
         /// <summary>
         /// Params.
         /// </summary>
-        protected ByteArrayAttribute params_ = new ByteArrayAttribute((uint)CKA.GOSTR3410PARAMS);
+        protected ByteArrayAttribute params_ = new ByteArrayAttribute((U_INT)CKA.GOSTR3410PARAMS);
         public ByteArrayAttribute Params
         {
             get { return params_; }
@@ -23,13 +31,13 @@ namespace Net.Sf.Pkcs11.Objects
             params_.Value = PKCS11Constants.SC_PARAMSET_GOSTR3410_A;
         }
 
-        public GostPrivateKey(Session session, uint hObj)
+        public GostPrivateKey(Session session, U_INT hObj)
             : base(session, hObj)
         {
             params_.Value = PKCS11Constants.SC_PARAMSET_GOSTR3410_A;
         }
 
-        public static new P11Object GetInstance(Session session, uint hObj)
+        public static new P11Object GetInstance(Session session, U_INT hObj)
         {
             return new GostPrivateKey(session, hObj);
         }

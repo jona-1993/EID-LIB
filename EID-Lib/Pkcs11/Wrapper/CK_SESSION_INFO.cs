@@ -1,16 +1,23 @@
 ﻿using System.Runtime.InteropServices;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Wrapper
 {
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = 1)]
 	public struct CK_SESSION_INFO{ 
 		
-		public uint slotID;
+		public U_INT slotID;
 		
-		public uint state;
+		public U_INT state;
 		
-		public uint flags;
+		public U_INT flags;
 		
-		public uint ulDeviceError;
+		public U_INT ulDeviceError;
 	}
 }

@@ -32,6 +32,13 @@ using Net.Sf.Pkcs11.Wrapper;
 using System.Security.Cryptography.X509Certificates;
 using PublicKey = Net.Sf.Pkcs11.Objects.PublicKey;
 
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace EIDLib
 {
     public class ReadData
@@ -198,7 +205,7 @@ namespace EIDLib
 
                         // "The label attribute of the objects should equal ..."
                         ByteArrayAttribute classAttribute = new ByteArrayAttribute(CKA.CLASS);
-                        classAttribute.Value = BitConverter.GetBytes((uint)Net.Sf.Pkcs11.Wrapper.CKO.DATA);
+                        classAttribute.Value = BitConverter.GetBytes((U_INT)Net.Sf.Pkcs11.Wrapper.CKO.DATA);
 
 
                         ByteArrayAttribute labelAttribute = new ByteArrayAttribute(CKA.LABEL);
@@ -212,7 +219,7 @@ namespace EIDLib
                         while (counter > 0)
                         {
                             //foundObjects[counter-1].ReadAttributes(session);
-                            //public static BooleanAttribute ReadAttribute(Session session, uint hObj, BooleanAttribute attr)
+                            //public static BooleanAttribute ReadAttribute(Session session, U_INT hObj, BooleanAttribute attr)
                             data = foundObjects[counter - 1] as Data;
                             label = data.Label.ToString();
                             if (label != null)
@@ -345,7 +352,7 @@ namespace EIDLib
                     ByteArrayAttribute fileLabel = new ByteArrayAttribute(CKA.LABEL);
                     fileLabel.Value = System.Text.Encoding.UTF8.GetBytes(Filename);
                     ByteArrayAttribute fileData = new ByteArrayAttribute(CKA.CLASS);
-                    fileData.Value = BitConverter.GetBytes((uint)Net.Sf.Pkcs11.Wrapper.CKO.DATA);
+                    fileData.Value = BitConverter.GetBytes((U_INT)Net.Sf.Pkcs11.Wrapper.CKO.DATA);
                     session.FindObjectsInit(new P11Attribute[] {
                         fileLabel,fileData
                     });

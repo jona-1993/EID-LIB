@@ -1,6 +1,13 @@
 ﻿
 using System;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Wrapper
 {
 	/// <summary>
@@ -8,8 +15,8 @@ namespace Net.Sf.Pkcs11.Wrapper
 	/// </summary>
 	public struct KeyPairHandler 
 	{
-		public uint hPrivateKey;
-		public uint hPublicKey;
+		public U_INT hPrivateKey;
+		public U_INT hPublicKey;
 
 	}
 }

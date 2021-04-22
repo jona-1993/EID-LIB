@@ -1,5 +1,13 @@
 ﻿using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	public class BooleanAttribute:P11Attribute
@@ -13,10 +21,10 @@ namespace Net.Sf.Pkcs11.Objects
 			}
 		}
 		
-		internal BooleanAttribute(uint type ):base(type){
+		internal BooleanAttribute(U_INT type ):base(type){
 			
 		}
-		internal BooleanAttribute(CKA type ):base((uint)type){
+		internal BooleanAttribute(CKA type ):base((U_INT)type){
 		}
 		
 		internal BooleanAttribute(CK_ATTRIBUTE attr ):base(attr){

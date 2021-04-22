@@ -3,6 +3,13 @@ using System;
 using Net.Sf.Pkcs11.Wrapper;
 using Net.Sf.Pkcs11;
 
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
     /// <summary>
@@ -10,12 +17,12 @@ namespace Net.Sf.Pkcs11.Objects
     /// </summary>
     public class P11Object
     {
-        private uint hObj;
+        private U_INT hObj;
 
         /// <summary>
         /// Handle of and object (read-only).
         /// </summary>
-        public uint HObj
+        public U_INT HObj
         {
             get { return hObj; }
             internal set { hObj = value; }
@@ -28,7 +35,7 @@ namespace Net.Sf.Pkcs11.Objects
             get { return class_; }
         }
 
-        internal P11Object(Session session, uint hObj)
+        internal P11Object(Session session, U_INT hObj)
         {
             this.hObj = hObj;
 
@@ -40,7 +47,7 @@ namespace Net.Sf.Pkcs11.Objects
             this.hObj = 0;
         }
 
-        public static P11Object GetInstance(Session session, uint hObj)
+        public static P11Object GetInstance(Session session, U_INT hObj)
         {
             if (session == null)
                 throw new Exception("Argument \"session\" must not be null.");
@@ -85,9 +92,9 @@ namespace Net.Sf.Pkcs11.Objects
         }
 
 
-        protected static P11Attribute AssignAttributeFromObj(Session session, uint hObj, P11Attribute attr)
+        protected static P11Attribute AssignAttributeFromObj(Session session, U_INT hObj, P11Attribute attr)
         {
-            uint hSession = session.HSession;
+            U_INT hSession = session.HSession;
             Wrapper.Pkcs11Module pm = session.Module.P11Module;
             try
             {
@@ -99,63 +106,63 @@ namespace Net.Sf.Pkcs11.Objects
             }
         }
 
-        public static BooleanAttribute ReadAttribute(Session session, uint hObj, BooleanAttribute attr)
+        public static BooleanAttribute ReadAttribute(Session session, U_INT hObj, BooleanAttribute attr)
         {
             return (BooleanAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static ByteArrayAttribute ReadAttribute(Session session, uint hObj, ByteArrayAttribute attr)
+        public static ByteArrayAttribute ReadAttribute(Session session, U_INT hObj, ByteArrayAttribute attr)
         {
             return (ByteArrayAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static CertificateTypeAttribute ReadAttribute(Session session, uint hObj, CertificateTypeAttribute attr)
+        public static CertificateTypeAttribute ReadAttribute(Session session, U_INT hObj, CertificateTypeAttribute attr)
         {
             return (CertificateTypeAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static CharArrayAttribute ReadAttribute(Session session, uint hObj, CharArrayAttribute attr)
+        public static CharArrayAttribute ReadAttribute(Session session, U_INT hObj, CharArrayAttribute attr)
         {
             return (CharArrayAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static DateAttribute ReadAttribute(Session session, uint hObj, DateAttribute attr)
+        public static DateAttribute ReadAttribute(Session session, U_INT hObj, DateAttribute attr)
         {
             return (DateAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static KeyTypeAttribute ReadAttribute(Session session, uint hObj, KeyTypeAttribute attr)
+        public static KeyTypeAttribute ReadAttribute(Session session, U_INT hObj, KeyTypeAttribute attr)
         {
             return (KeyTypeAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static MechanismTypeAttribute ReadAttribute(Session session, uint hObj, MechanismTypeAttribute attr)
+        public static MechanismTypeAttribute ReadAttribute(Session session, U_INT hObj, MechanismTypeAttribute attr)
         {
             return (MechanismTypeAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static ObjectClassAttribute ReadAttribute(Session session, uint hObj, ObjectClassAttribute attr)
+        public static ObjectClassAttribute ReadAttribute(Session session, U_INT hObj, ObjectClassAttribute attr)
         {
             return (ObjectClassAttribute)GetAttribute(session, hObj, attr);
         }
 
 
 
-        public static UIntAttribute ReadAttribute(Session session, uint hObj, UIntAttribute attr)
+        public static UIntAttribute ReadAttribute(Session session, U_INT hObj, UIntAttribute attr)
         {
             return (UIntAttribute)GetAttribute(session, hObj, attr);
         }
@@ -168,11 +175,11 @@ namespace Net.Sf.Pkcs11.Objects
             class_ = ReadAttribute(session, hObj, new ObjectClassAttribute());
         }
 
-        public static P11Attribute GetAttribute(Session session, uint hObj, P11Attribute attr)
+        public static P11Attribute GetAttribute(Session session, U_INT hObj, P11Attribute attr)
         {
             try
             {
-                uint hSession = session.HSession;
+                U_INT hSession = session.HSession;
                 Wrapper.Pkcs11Module pm = session.Module.P11Module;
 
                 CK_ATTRIBUTE tmp = pm.GetAttributeValue(hSession, hObj, new CK_ATTRIBUTE[] { attr.CK_ATTRIBUTE })[0];

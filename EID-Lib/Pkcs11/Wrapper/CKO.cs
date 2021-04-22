@@ -1,7 +1,13 @@
-﻿
+﻿using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Wrapper
 {
-	public enum CKO:uint{
+	public enum CKO:U_INT{
 		DATA = PKCS11Constants.CKO_DATA ,
         CERTIFICATE = PKCS11Constants.CKO_CERTIFICATE,
         PUBLIC_KEY = PKCS11Constants.CKO_PUBLIC_KEY,

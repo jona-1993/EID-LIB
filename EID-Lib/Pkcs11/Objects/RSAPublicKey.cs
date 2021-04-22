@@ -2,6 +2,13 @@
 using System;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -20,7 +27,7 @@ namespace Net.Sf.Pkcs11.Objects
 		public ByteArrayAttribute PublicExponent {
 			get { return publicExponent_; }
 		}
-		protected UIntAttribute modulusBits_ = new UIntAttribute((uint)CKA.MODULUS_BITS);
+		protected UIntAttribute modulusBits_ = new UIntAttribute((U_INT)CKA.MODULUS_BITS);
 		
 		public UIntAttribute ModulusBits {
 			get { return modulusBits_; }
@@ -31,12 +38,12 @@ namespace Net.Sf.Pkcs11.Objects
 			this.KeyType.KeyType= CKK.RSA;
 		}
 		
-		public RSAPublicKey(Session session, uint hObj):base(session,hObj)
+		public RSAPublicKey(Session session, U_INT hObj):base(session,hObj)
 		{
 			
 		}
 		
-		public static new P11Object GetInstance(Session session, uint hObj)
+		public static new P11Object GetInstance(Session session, U_INT hObj)
 		{
 			return new RSAPublicKey(session,hObj) ;
 		}
@@ -49,7 +56,7 @@ namespace Net.Sf.Pkcs11.Objects
 
 			publicExponent_= ReadAttribute(session,HObj,new ByteArrayAttribute(CKA.PUBLIC_EXPONENT));
 			
-			modulusBits_= ReadAttribute(session,HObj,new UIntAttribute((uint)CKA.MODULUS_BITS));
+			modulusBits_= ReadAttribute(session,HObj,new UIntAttribute((U_INT)CKA.MODULUS_BITS));
 
 		}
 	}

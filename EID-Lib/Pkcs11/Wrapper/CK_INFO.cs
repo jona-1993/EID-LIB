@@ -1,4 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Wrapper
 {
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = 1)]
@@ -9,7 +17,7 @@ namespace Net.Sf.Pkcs11.Wrapper
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
         public byte[] manufacturerID;
 
-        public uint flags;
+        public U_INT flags;
 
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
         public byte[] libraryDescription;

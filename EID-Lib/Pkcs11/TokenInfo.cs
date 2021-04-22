@@ -34,43 +34,43 @@ namespace Net.Sf.Pkcs11
 		}
 		
 		public long MaxSessionCount {
-			get { return paramCK_TOKEN_INFO.ulMaxSessionCount; }
+			get { return (long)paramCK_TOKEN_INFO.ulMaxSessionCount; }
 		}
 		
 		public long SessionCount {
-			get { return paramCK_TOKEN_INFO.ulSessionCount; }
+			get { return (long)paramCK_TOKEN_INFO.ulSessionCount; }
 		}
 		
 		public long MaxRwSessionCount {
-			get { return paramCK_TOKEN_INFO.ulMaxRwSessionCount; }
+			get { return (long)paramCK_TOKEN_INFO.ulMaxRwSessionCount; }
 		}
 		
 		public long RwSessionCount {
-			get { return paramCK_TOKEN_INFO.ulRwSessionCount; }
+			get { return (long)paramCK_TOKEN_INFO.ulRwSessionCount; }
 		}
 		
 		public long MaxPinLen {
-			get { return paramCK_TOKEN_INFO.ulMaxPinLen; }
+			get { return (long)paramCK_TOKEN_INFO.ulMaxPinLen; }
 		}
 		
 		public long MinPinLen {
-			get { return paramCK_TOKEN_INFO.ulMinPinLen; }
+			get { return (long)paramCK_TOKEN_INFO.ulMinPinLen; }
 		}
 		
 		public long TotalPublicMemory {
-			get { return paramCK_TOKEN_INFO.ulTotalPublicMemory; }
+			get { return (long)paramCK_TOKEN_INFO.ulTotalPublicMemory; }
 		}
 		
 		public long FreePublicMemory {
-			get { return paramCK_TOKEN_INFO.ulFreePublicMemory;}
+			get { return (long)paramCK_TOKEN_INFO.ulFreePublicMemory;}
 		}
 		
 		public long TotalPrivateMemory {
-			get { return paramCK_TOKEN_INFO.ulTotalPrivateMemory; }
+			get { return (long)paramCK_TOKEN_INFO.ulTotalPrivateMemory; }
 		}
 		
 		public long FreePrivateMemory {
-			get { return paramCK_TOKEN_INFO.ulFreePrivateMemory; }
+			get { return (long)paramCK_TOKEN_INFO.ulFreePrivateMemory; }
 		}
 		
 		public Version HardwareVersion {

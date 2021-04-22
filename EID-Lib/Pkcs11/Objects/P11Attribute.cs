@@ -2,6 +2,13 @@
 using Net.Sf.Pkcs11.Wrapper;
 using System.Runtime.InteropServices;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	public abstract class P11Attribute
@@ -13,12 +20,19 @@ namespace Net.Sf.Pkcs11.Objects
 		}
 
 		protected CK_ATTRIBUTE attr=new CK_ATTRIBUTE();
-		
-		internal uint Type {
+
+#if Windows
+		internal U_INT Type { 
 			 get { return attr.type; }
 			 private set {attr.type=value;}
 		}
-		
+#else
+		internal UInt64 Type {
+			 get { return attr.type; }
+			 private set {attr.type=value;}
+		}
+#endif
+
 		internal CKA CKA{
 			get{
 				return (CKA)attr.type;
@@ -31,7 +45,11 @@ namespace Net.Sf.Pkcs11.Objects
 		}
 		
 		protected void AssignValue( byte[] val ){
-			attr.ulValueLen=(uint)val.Length;
+#if Windows
+			attr.ulValueLen=(U_INT)val.Length;
+#else
+			attr.ulValueLen=(UInt64)val.Length;
+#endif
 			attr.pValue=Marshal.AllocHGlobal(val.Length);
 			Marshal.Copy(val,0,attr.pValue,val.Length);
 		}
@@ -63,12 +81,17 @@ namespace Net.Sf.Pkcs11.Objects
 		internal P11Attribute(){
 			this.attr=new CK_ATTRIBUTE();
 		}
-		
-		internal P11Attribute(uint type):base(){
+
+#if Windows
+		internal P11Attribute(U_INT type):base(){
 			this.Type=type;
 		}
-		
-		
+#else
+		internal P11Attribute(UInt64 type):base(){
+			this.Type=type;
+		}
+#endif
+
 		private byte[] getAsBinary(IntPtr ptr, int size){
 			if(ptr==IntPtr.Zero)
 				return null;

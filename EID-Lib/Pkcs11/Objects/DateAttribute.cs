@@ -2,6 +2,14 @@
 using System;
 using System.Runtime.InteropServices;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -27,7 +35,7 @@ namespace Net.Sf.Pkcs11.Objects
 		{
 		}
 		
-		public DateAttribute(uint type):base(type)
+		public DateAttribute(U_INT type):base(type)
 		{
 		}
 		
@@ -58,7 +66,7 @@ namespace Net.Sf.Pkcs11.Objects
 					CK_DATE d=P11Util.ConvertToCK_DATE(val);
 					attr.pValue = Marshal.AllocHGlobal(Marshal.SizeOf(d));
 					Marshal.StructureToPtr(d, attr.pValue, false);
-					attr.ulValueLen=(uint)Marshal.SizeOf(d);
+					attr.ulValueLen=(U_INT)Marshal.SizeOf(d);
 					
 				}else{
 					AssignNullValue();

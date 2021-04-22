@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using System.Text;
 
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 
@@ -14,12 +21,12 @@ namespace Net.Sf.Pkcs11.Objects
     /// </summary>
     public class DomainParameters : Storage
     {
-        public static new P11Object GetInstance(Session session, uint hObj)
+        public static new P11Object GetInstance(Session session, U_INT hObj)
         {
             return new DomainParameters(session, hObj);
         }
 
-        public DomainParameters(Session session, uint hObj)
+        public DomainParameters(Session session, U_INT hObj)
             : base(session, hObj)
         {
         }

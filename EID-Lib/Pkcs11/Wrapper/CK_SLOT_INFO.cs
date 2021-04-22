@@ -1,4 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Wrapper
 {
 
@@ -11,7 +19,7 @@ namespace Net.Sf.Pkcs11.Wrapper
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = 32)]
         public byte[] manufacturerID;
 
-        public uint flags;
+        public U_INT flags;
 
         public CK_VERSION hardwareVersion;
 

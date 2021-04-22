@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
     /// <summary>
@@ -85,7 +93,7 @@ namespace Net.Sf.Pkcs11.Objects
         {
         }
 
-        public PrivateKey(Session session, uint hObj)
+        public PrivateKey(Session session, U_INT hObj)
             : base(session, hObj)
         {
 
@@ -110,7 +118,7 @@ namespace Net.Sf.Pkcs11.Objects
             alwaysAuthenticate = ReadAttribute(session, HObj, new BooleanAttribute(CKA.ALWAYS_AUTHENTICATE));
         }
 
-        public static new P11Object GetInstance(Session session, uint hObj)
+        public static new P11Object GetInstance(Session session, U_INT hObj)
         {
 
             KeyTypeAttribute keyAttr = ReadAttribute(session, hObj, new KeyTypeAttribute());

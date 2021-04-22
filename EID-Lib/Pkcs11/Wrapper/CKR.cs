@@ -1,12 +1,18 @@
 ﻿
 using System;
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
 
 namespace Net.Sf.Pkcs11.Wrapper
 {
 	/// <summary>
 	/// Description of CKR.
 	/// </summary>
-	public enum CKR:uint{
+	public enum CKR:U_INT{
 		OK = PKCS11Constants.CKR_OK,
 		CANCEL = PKCS11Constants.CKR_CANCEL,
 		HOST_MEMORY = PKCS11Constants.CKR_HOST_MEMORY,

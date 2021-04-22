@@ -1,6 +1,13 @@
 ﻿
 using System;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11
 {
 	/// <summary>
@@ -13,9 +20,9 @@ namespace Net.Sf.Pkcs11
 		public Module Module {
 			get { return m; }
 		}
-		uint slotId;
+		U_INT slotId;
 		
-		public uint SlotId {
+		public U_INT SlotId {
 			get { return slotId; }
 		}
 		
@@ -37,7 +44,7 @@ namespace Net.Sf.Pkcs11
 			}
 		}
 		
-		public Slot(Module m, uint slotId){
+		public Slot(Module m, U_INT slotId){
 			this.m=m;
 			this.slotId=slotId;
 		}

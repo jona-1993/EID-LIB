@@ -1,4 +1,12 @@
 ﻿using System.Runtime.InteropServices;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Wrapper
 {
 	[StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode, Pack = 1)]
@@ -16,27 +24,27 @@ namespace Net.Sf.Pkcs11.Wrapper
 		[MarshalAs(UnmanagedType.ByValArray, SizeConst = 16)]
 		public byte[] serialNumber;
 
-		public uint flags;
+		public U_INT flags;
 
-		public uint ulMaxSessionCount;
+		public U_INT ulMaxSessionCount;
 		
-		public uint ulSessionCount;
+		public U_INT ulSessionCount;
 		
-		public uint ulMaxRwSessionCount;
+		public U_INT ulMaxRwSessionCount;
 		
-		public uint ulRwSessionCount;
+		public U_INT ulRwSessionCount;
 		
-		public uint ulMaxPinLen;
+		public U_INT ulMaxPinLen;
 		
-		public uint ulMinPinLen;
+		public U_INT ulMinPinLen;
 		
-		public uint ulTotalPublicMemory;
+		public U_INT ulTotalPublicMemory;
 		
-		public uint ulFreePublicMemory;
+		public U_INT ulFreePublicMemory;
 		
-		public uint ulTotalPrivateMemory;
+		public U_INT ulTotalPrivateMemory;
 		
-		public uint ulFreePrivateMemory;
+		public U_INT ulFreePrivateMemory;
 		
 		public CK_VERSION hardwareVersion;
 		

@@ -1,7 +1,14 @@
 ﻿
 namespace Net.Sf.Pkcs11.Wrapper
 {
-	public enum CKA:uint
+	using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
+	public enum CKA:U_INT
 	{
 		CLASS = PKCS11Constants.CKA_CLASS,
 		TOKEN = PKCS11Constants.CKA_TOKEN,

@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -9,13 +17,13 @@ namespace Net.Sf.Pkcs11.Objects
 	public class MechanismTypeAttribute:UIntAttribute
 	{
 		
-		internal MechanismTypeAttribute(uint type ):base(type){
+		internal MechanismTypeAttribute(U_INT type ):base(type){
 			
 		}
-		internal MechanismTypeAttribute(CKA type ):base((uint)type){
+		internal MechanismTypeAttribute(CKA type ):base((U_INT)type){
 		}
 		
-		public MechanismTypeAttribute(CKA type, CKM mechanismType):base((uint)type)
+		public MechanismTypeAttribute(CKA type, CKM mechanismType):base((U_INT)type)
 		{
 			MechanismType=mechanismType;
 		}
@@ -27,7 +35,7 @@ namespace Net.Sf.Pkcs11.Objects
 		
 		public CKM MechanismType {
 			get { return (CKM)base.Value; }
-			set { base.Value= (uint)value; }
+			set { base.Value= (U_INT)value; }
 		}
 		
 		protected override P11Attribute GetCkLoadedCopy()

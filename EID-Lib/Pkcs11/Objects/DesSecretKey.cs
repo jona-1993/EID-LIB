@@ -1,5 +1,13 @@
 ﻿using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	public class DesSecretKey:SecretKey
@@ -14,7 +22,7 @@ namespace Net.Sf.Pkcs11.Objects
 			this.KeyType.KeyType= CKK.DES;
 		}
 		
-		public DesSecretKey(Session session, uint hObj):base(session,hObj)
+		public DesSecretKey(Session session, U_INT hObj):base(session,hObj)
 		{
 		}
 		
@@ -25,7 +33,7 @@ namespace Net.Sf.Pkcs11.Objects
 			value_=ReadAttribute(session,HObj,new ByteArrayAttribute(CKA.VALUE));
 		}
 		
-		public static new P11Object GetInstance(Session session, uint hObj)
+		public static new P11Object GetInstance(Session session, U_INT hObj)
 		{
 			return new DesSecretKey(session,hObj);
 		}

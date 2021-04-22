@@ -4,6 +4,13 @@ using System.Text;
 
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
     public class Data : Storage
@@ -28,12 +35,12 @@ namespace Net.Sf.Pkcs11.Objects
         }
 
 
-        public static new P11Object GetInstance(Session session, uint hObj)
+        public static new P11Object GetInstance(Session session, U_INT hObj)
         {
             return new Data(session, hObj);
         }
 
-        public Data(Session session, uint hObj)
+        public Data(Session session, U_INT hObj)
             : base(session, hObj)
         {
         }

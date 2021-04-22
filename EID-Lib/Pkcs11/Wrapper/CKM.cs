@@ -1,9 +1,16 @@
 ﻿using System;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Wrapper
 {
 
-	public enum CKM:uint
+	public enum CKM:U_INT
 	{
 		RSA_PKCS_KEY_PAIR_GEN = PKCS11Constants.CKM_RSA_PKCS_KEY_PAIR_GEN,
 		RSA_PKCS = PKCS11Constants.CKM_RSA_PKCS,

@@ -6,6 +6,13 @@ using System.Reflection;
 using Net.Sf.Pkcs11.Objects;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11
 {
     /// <summary>
@@ -16,7 +23,7 @@ namespace Net.Sf.Pkcs11
         #region Members
         Token token;
 
-        uint hSession; 
+        U_INT hSession; 
         #endregion
 
         #region Properties
@@ -40,7 +47,7 @@ namespace Net.Sf.Pkcs11
         /// <summary>
         /// Session Handle / id
         /// </summary>
-        public uint HSession
+        public U_INT HSession
         {
             get { return hSession; }
         } 
@@ -56,7 +63,7 @@ namespace Net.Sf.Pkcs11
         /// </summary>
         /// <param name="token">Session's Token</param>
         /// <param name="hSession">Session Handle / Id</param>
-        public Session(Token token, uint hSession)
+        public Session(Token token, U_INT hSession)
         {
             this.token = token;
             this.hSession = hSession;
@@ -247,7 +254,7 @@ namespace Net.Sf.Pkcs11
 
         public SecretKey GenerateKey(Mechanism mech, P11Object template)
         {
-            uint hKey = this.Module.P11Module.GenerateKey(hSession, mech.CK_MECHANISM, getAssignedAttributes(template));
+            U_INT hKey = this.Module.P11Module.GenerateKey(hSession, mech.CK_MECHANISM, getAssignedAttributes(template));
             return (SecretKey)SecretKey.GetInstance(this, hKey);
         }
 
@@ -282,9 +289,9 @@ namespace Net.Sf.Pkcs11
             this.Module.P11Module.FindObjectsInit(this.hSession, ckAttrs);
         }
 
-        public P11Object[] FindObjects(uint maxCount)
+        public P11Object[] FindObjects(U_INT maxCount)
         {
-            uint[] hObjs = this.Module.P11Module.FindObjects(HSession, maxCount);
+            U_INT[] hObjs = this.Module.P11Module.FindObjects(HSession, maxCount);
             P11Object[] objs = new P11Object[hObjs.Length];
             for (int i = 0; i < hObjs.Length; ++i)
             {
@@ -305,7 +312,7 @@ namespace Net.Sf.Pkcs11
         public P11Object CreateObject(P11Object template)
         {
 
-            uint hObj = this.Module.P11Module.CreateObject(hSession, getAssignedAttributes(template));
+            U_INT hObj = this.Module.P11Module.CreateObject(hSession, getAssignedAttributes(template));
             return P11Object.GetInstance(this, hObj);
         }
 

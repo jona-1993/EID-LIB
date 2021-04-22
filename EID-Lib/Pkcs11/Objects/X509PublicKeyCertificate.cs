@@ -2,6 +2,14 @@
 using System;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -41,10 +49,10 @@ namespace Net.Sf.Pkcs11.Objects
 			this.CertificateType.CertificateType= CKC.X_509;
 		}
 		
-		public X509PublicKeyCertificate(Session session, uint hObj):base(session,hObj)
+		public X509PublicKeyCertificate(Session session, U_INT hObj):base(session,hObj)
 		{			
 		}
-		public static new P11Object GetInstance(Session session, uint hObj)
+		public static new P11Object GetInstance(Session session, U_INT hObj)
 		{
 			return new X509PublicKeyCertificate(session,hObj) ;
 		}

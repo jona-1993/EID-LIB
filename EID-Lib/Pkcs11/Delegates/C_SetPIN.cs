@@ -2,14 +2,21 @@
 using System;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Delegates
 {
      [System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute(System.Runtime.InteropServices.CallingConvention.Cdecl)]
 	internal delegate CKR C_SetPIN(
-		uint hSession, 
+		U_INT hSession, 
 		byte[] pOldPin, 
-		uint ulOldLen,
+		U_INT ulOldLen,
 		byte[] pNewPin, 
-		uint ulNewLen
+		U_INT ulNewLen
 	);
 }

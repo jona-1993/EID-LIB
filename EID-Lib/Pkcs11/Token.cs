@@ -3,6 +3,13 @@ using System;
 using Net.Sf.Pkcs11.Objects;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11
 {
 	/// <summary>
@@ -24,7 +31,7 @@ namespace Net.Sf.Pkcs11
 			this.slot_=slot;
 		}
 		
-		public uint TokenId{
+		public U_INT TokenId{
 			get { return slot_.SlotId; }
 		}
 		

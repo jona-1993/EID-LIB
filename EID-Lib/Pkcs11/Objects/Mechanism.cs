@@ -3,6 +3,13 @@ using System;
 using Net.Sf.Pkcs11.Wrapper;
 using Net.Sf.Pkcs11.Params;
 
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
     /// <summary>
@@ -36,7 +43,7 @@ namespace Net.Sf.Pkcs11.Objects
             get
             {
                 CK_MECHANISM mech = new CK_MECHANISM();
-                mech.mechanism = (uint)ckm;
+                mech.mechanism = (U_INT)ckm;
 
                 parameters.ApplyToMechanism(mech);
 

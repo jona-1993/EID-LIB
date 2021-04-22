@@ -4,6 +4,13 @@ using System.Collections;
 using System.Collections.Generic;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11
 {
     /// <summary>
@@ -109,7 +116,7 @@ namespace Net.Sf.Pkcs11
         /// <returns></returns>
         public Slot WaitForSlotEvent(bool DO_NOT_BLOCK)
         {
-            uint lSlotId = p11Module.WaitForSlotEvent(DO_NOT_BLOCK);
+            U_INT lSlotId = p11Module.WaitForSlotEvent(DO_NOT_BLOCK);
             return new Slot(this, lSlotId);
         }
 

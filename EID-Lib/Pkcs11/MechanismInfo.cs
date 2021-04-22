@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11
 {
 
@@ -12,8 +20,8 @@ namespace Net.Sf.Pkcs11
 			this.mi=mi;
 		}
 		
-		public uint MaxKeySize{get{return mi.ulMaxKeySize;}}
-		public uint MinKeySize{get{return mi.ulMinKeySize;}}
+		public U_INT MaxKeySize{get{return mi.ulMaxKeySize;}}
+		public U_INT MinKeySize{get{return mi.ulMinKeySize;}}
 		
 
 		public bool HW{

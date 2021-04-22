@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -8,7 +16,7 @@ namespace Net.Sf.Pkcs11.Objects
 	/// </summary>
 	public class CertificateTypeAttribute:UIntAttribute
 	{
-		public CertificateTypeAttribute():base((uint)CKA.CERTIFICATE_TYPE)
+		public CertificateTypeAttribute():base((U_INT)CKA.CERTIFICATE_TYPE)
 		{
 		}
 		
@@ -18,7 +26,7 @@ namespace Net.Sf.Pkcs11.Objects
 		
 		public CKC CertificateType {
 			get { return (CKC)base.Value; }
-			set { base.Value= (uint)value;
+			set { base.Value= (U_INT)value;
 				IsAssigned=true;
 			}
 		}

@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
     /// <summary>
@@ -34,7 +42,7 @@ namespace Net.Sf.Pkcs11.Objects
         }
 
 
-        public Storage(Session session, uint hObj)
+        public Storage(Session session, U_INT hObj)
             : base(session, hObj)
         {
         }

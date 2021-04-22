@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+        System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
     /// <summary>
@@ -22,14 +30,14 @@ namespace Net.Sf.Pkcs11.Objects
             get { return id; }
         }
 
-        DateAttribute startDate = new DateAttribute((uint)CKA.START_DATE);
+        DateAttribute startDate = new DateAttribute((U_INT)CKA.START_DATE);
 
         public DateAttribute StartDate
         {
             get { return startDate; }
         }
 
-        DateAttribute endDate = new DateAttribute((uint)CKA.END_DATE);
+        DateAttribute endDate = new DateAttribute((U_INT)CKA.END_DATE);
 
         public DateAttribute EndDate
         {
@@ -65,13 +73,13 @@ namespace Net.Sf.Pkcs11.Objects
         {
         }
 
-        public Key(Session session, uint hObj)
+        public Key(Session session, U_INT hObj)
             : base(session, hObj)
         {
 
         }
 
-        public static new P11Object GetInstance(Session session, uint hObj)
+        public static new P11Object GetInstance(Session session, U_INT hObj)
         {
             return null;
         }
@@ -84,9 +92,9 @@ namespace Net.Sf.Pkcs11.Objects
 
             id = ReadAttribute(session, HObj, new ByteArrayAttribute(CKA.ID));
 
-            startDate = ReadAttribute(session, HObj, new DateAttribute((uint)CKA.START_DATE));
+            startDate = ReadAttribute(session, HObj, new DateAttribute((U_INT)CKA.START_DATE));
 
-            endDate = ReadAttribute(session, HObj, new DateAttribute((uint)CKA.END_DATE));
+            endDate = ReadAttribute(session, HObj, new DateAttribute((U_INT)CKA.END_DATE));
 
             derive = ReadAttribute(session, HObj, new BooleanAttribute(CKA.DERIVE));
 

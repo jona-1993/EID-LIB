@@ -2,6 +2,13 @@
 using System;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -18,11 +25,11 @@ namespace Net.Sf.Pkcs11.Objects
 			}
 		}
 		
-		public ByteArrayAttribute(uint type):base(type)
+		public ByteArrayAttribute(U_INT type):base(type)
 		{
 		}
 		
-		public ByteArrayAttribute(CKA type):base((uint)type)
+		public ByteArrayAttribute(CKA type):base((U_INT)type)
 		{
 		}
 		

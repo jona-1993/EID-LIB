@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -24,7 +32,7 @@ namespace Net.Sf.Pkcs11.Objects
 			this.Class.ObjectType= CKO.CERTIFICATE;
 		}
 		
-		public Certificate(Session session, uint hObj):base(session,hObj)
+		public Certificate(Session session, U_INT hObj):base(session,hObj)
 		{
 		}
 		
@@ -38,7 +46,7 @@ namespace Net.Sf.Pkcs11.Objects
 			
 		}
 		
-		public static new P11Object GetInstance(Session session, uint hObj)
+		public static new P11Object GetInstance(Session session, U_INT hObj)
 		{
 			if (session == null)
 				throw new NullReferenceException("Argument \"session\" must not be null.");

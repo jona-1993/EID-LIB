@@ -1,6 +1,14 @@
 ﻿
 using System;
 using Net.Sf.Pkcs11.Wrapper;
+
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Objects
 {
 	/// <summary>
@@ -55,11 +63,11 @@ namespace Net.Sf.Pkcs11.Objects
 			this.KeyType.KeyType= CKK.RSA;
 		}
 		
-		public RSAPrivateKey(Session session, uint hObj):base(session,hObj)
+		public RSAPrivateKey(Session session, U_INT hObj):base(session,hObj)
 		{
 		}
 		
-		public static new P11Object GetInstance(Session session, uint hObj)
+		public static new P11Object GetInstance(Session session, U_INT hObj)
 		{
 			return new RSAPrivateKey(session,hObj) ;
 		}

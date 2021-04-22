@@ -1,17 +1,24 @@
 ﻿using System;
 using Net.Sf.Pkcs11.Wrapper;
 
+using U_INT =
+#if Windows
+		System.UInt32;
+#else
+		System.UInt64;
+#endif
+
 namespace Net.Sf.Pkcs11.Delegates
 {
      [System.Runtime.InteropServices.UnmanagedFunctionPointerAttribute(System.Runtime.InteropServices.CallingConvention.Cdecl)]
 	internal delegate CKR  C_GenerateKeyPair(
-		uint hSession,
+		U_INT hSession,
 		ref CK_MECHANISM pMechanism,
 		CK_ATTRIBUTE[] pPublicKeyTemplate,
-		uint ulPublicKeyAttributeCount,
+		U_INT ulPublicKeyAttributeCount,
 		CK_ATTRIBUTE[] pPrivateKeyTemplate,
-		uint ulPrivateKeyAttributeCount,
-		ref uint phPublicKey,
-		ref uint phPrivateKey
+		U_INT ulPrivateKeyAttributeCount,
+		ref U_INT phPublicKey,
+		ref U_INT phPrivateKey
 	);
 }
