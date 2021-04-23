@@ -144,13 +144,60 @@ namespace EIDLib
 
         }
 
+        // PARSED DATA
+
         /// <summary>
-        /// Get surname of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// Get card number of the owner of the token (eid) in the first non-empty slot (cardreader)
         /// </summary>
         /// <returns></returns>
-        public string GetSpecialStatus()
+        public string GetCardNumber()
         {
-            return GetData("special_status");
+            return GetData("card_number");
+        }
+
+        /// <summary>
+        /// Get chip number of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetChipNumber()
+        {
+            return Encoding.UTF8.GetBytes("chip_number");
+        }
+
+        /// <summary>
+        /// Get validity begin date of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public string GetValidityBeginDate()
+        {
+            return GetData("validity_begin_date");
+        }
+
+        /// <summary>
+        /// Get validity end date of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public string GetValidityEndDate()
+        {
+            return GetData("validity_end_date");
+        }
+
+        /// <summary>
+        /// Get issuing municipality of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public string GetIssuingMunicipality()
+        {
+            return GetData("issuing_municipality");
+        }
+
+        /// <summary>
+        /// Get national number of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public string GetNationalNumber()
+        {
+            return GetData("national_number");
         }
 
         /// <summary>
@@ -163,6 +210,43 @@ namespace EIDLib
         }
 
         /// <summary>
+        /// Get firstnames of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public string GetFirstnames()
+        {
+            return GetData("firstnames");
+        }
+
+        /// <summary>
+        /// Get first letter of third given name of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public string GetFirstLetterOfThirdGivenName()
+        {
+            return GetData("first_letter_of_third_given_name");
+        }
+
+        /// <summary>
+        /// Get nationality of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// </summary>
+        /// <returns></returns>
+        public string GetNationality()
+        {
+            return GetData("nationality");
+        }
+
+        /// <summary>
+        /// Get location of birth of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetLocationOfBirth()
+        {
+            return GetData("location_of_birth");
+        }
+
+        /// <summary>
         /// Get date of birth of the owner. This is a language specific string
         /// More info about the format can be found in the eid specs.
         /// </summary>
@@ -172,7 +256,351 @@ namespace EIDLib
             return GetData("date_of_birth");
         }
 
+        /// <summary>
+        /// Get gender of the owner. (M/F/V/W) This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetGender()
+        {
+            return GetData("gender");
+        }
+
+        /// <summary>
+        /// Get nobility of the owner. (Noble condition) This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetNobility()
+        {
+            return GetData("nobility");
+        }
+        
+        /// <summary>
+        /// Get document type of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDocumentType()
+        {
+            return GetData("document_type");
+        }
+
+        /// <summary>
+        /// Get special status of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetSpecialStatus()
+        {
+            return GetData("special_status");
+        }
+
+        /// <summary>
+        /// Get hash of the photo file of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public byte[] GetPhotoHash()
+        {
+            return Encoding.UTF8.GetBytes("photo_hash");
+        }
+
+        /// <summary>
+        /// Get duplicata of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDuplicata()
+        {
+            return GetData("duplicata");
+        }
+
+        /// <summary>
+        /// Get special organization of the owner. (1: SHAPE, 2: NATO) This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetSpecialOrganization()
+        {
+            return GetData("special_organization");
+        }
+
+        /// <summary>
+        /// Get member of family of the owner. (bool) This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetMemberOfFamily()
+        {
+            return GetData("member_of_family");
+        }
+
+        /// <summary>
+        /// Get date and country of protection of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetDateAndCountryOfProtection()
+        {
+            return GetData("date_and_country_of_protection");
+        }
     
+        /// <summary>
+        /// Get work permit mention of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetWorkPermitMention()
+        {
+            return GetData("work_permit_mention");
+        }
+
+        /// <summary>
+        /// Get employer vat 1 of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetEmployerVat1()
+        {
+            return GetData("employer_vat_1");
+        }
+
+        /// <summary>
+        /// Get employer vat 2 of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetEmployerVat2()
+        {
+            return GetData("employer_vat_2");
+        }
+
+        /// <summary>
+        /// Get regional file number of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetRegionalFileNumber()
+        {
+            return GetData("regional_file_number");
+        }
+
+        /// <summary>
+        /// Get basic key hash of the owner. SHA384 hash of the public basic key. (applet 1.8+) This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetBasicKeyHash()
+        {
+            return GetData("basic_key_hash");
+        }
+
+        /// <summary>
+        /// Get brexit mention 1 of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetBrexitMention1()
+        {
+            return GetData("brexit_mention_1");
+        }
+
+        /// <summary>
+        /// Get brexit mention 2 of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetBrexitMention2()
+        {
+            return GetData("brexit_mention_2");
+        }
+
+        /// <summary>
+        /// Get streetname and number of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetAddressStreetAndNumber()
+        {
+            return GetData("address_street_and_number");
+        }
+
+        /// <summary>
+        /// Get address zip of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetAddressZip()
+        {
+            return GetData("address_zip");
+        }
+
+        /// <summary>
+        /// Get address municipality of the owner. This is a language specific string
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetAddressMunicipality()
+        {
+            return GetData("address_municipality");
+        }
+
+
+        // CARD INFO
+
+        private string BytesToHEXStringConverter(byte[] ba)
+        {
+            char[] c = new char[ba.Length * 2];
+            for( int i = 0; i < ba.Length * 2; ++i)
+            {
+                byte b = (byte)((ba[i>>1] >> 4*((i&1)^1)) & 0xF);
+                c[i] = (char)(55 + b + (((b-10)>>31)&-7));
+            }
+            return new string( c );
+        }
+
+        /// <summary>
+        /// Get card serial number (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardSerialNumber()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_serialnumber")));
+        }
+
+        /// <summary>
+        /// Get card comp code (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardCompCode()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_comp_code")));
+        }
+
+        /// <summary>
+        /// Get card OS number (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardOSNumber()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_os_number")));
+        }
+
+        /// <summary>
+        /// Get card OS version (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardOSVersion()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_os_version")));
+        }
+
+        /// <summary>
+        /// Get soft mask number (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardSoftMaskNumber()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_soft_mask_number")));
+        }
+
+        /// <summary>
+        /// Get soft mask version (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardSoftMaskVersion()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_soft_mask_version")));
+        }
+
+        /// <summary>
+        /// Get card applet version [Applet +1.7] (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardAppletVersion()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_appl_version")));
+        }
+
+        /// <summary>
+        /// Get glob OS version [Applet +1.7] (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardGlobOSVersion()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_glob_os_version")));
+        }
+
+        /// <summary>
+        /// Get card applet int version (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardAppletIntVersion()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_appl_int_version")));
+        }
+
+        /// <summary>
+        /// Get PKCS1 Support [Applet +1.7] (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardPKCS1Support()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_pkcs1_support")));
+        }
+
+        /// <summary>
+        /// Get applet life cycle [Applet +1.7] (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardAppletLifeCycle()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_appl_lifecycle")));
+        }
+
+        /// <summary>
+        /// Get PKCS1 Support [Applet +1.7] (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardPKCS15Version()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_pkcs15_version")));
+        }
+
+        /// <summary>
+        /// Get key exchange version (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        public string GetCardKeyExchangeVersion()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_key_exchange_version")));
+        }
+
+        /// <summary>
+        /// Get Signature (not yet available) (HEX)
+        /// More info about the format can be found in the eid specs.
+        /// </summary>
+        /// <returns></returns>
+        [Obsolete("Not yet available")]
+        public string GetCardSignature()
+        {
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes(GetData("carddata_signature")));
+        }
+        
         /// <summary>
         /// Generic function to get string data objects from label
         /// </summary>
@@ -227,7 +655,7 @@ namespace EIDLib
                             if (data.Value.Value != null)
                             {
                                 value = System.Text.Encoding.UTF8.GetString(data.Value.Value);
-                                Console.WriteLine(value);
+                                //Console.WriteLine(value);
                             }
                             counter--;
                         }
