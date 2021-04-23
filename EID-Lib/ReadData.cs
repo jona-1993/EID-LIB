@@ -37,6 +37,7 @@ using U_INT =
         System.UInt32;
 #else
 		System.UInt64;
+using System.IO;
 #endif
 
 namespace EIDLib
@@ -45,6 +46,8 @@ namespace EIDLib
     {
         private Module m = null;
         private String mFileName;
+        private int applet_version = 0;
+
         /// <summary>
         /// Default constructor. Will instantiate the beidpkcs11.dll pkcs11 module
         /// </summary>
@@ -60,7 +63,17 @@ namespace EIDLib
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                mFileName = "/usr/lib/pkcs11/beidpkcs11.so";
+                mFileName = "libbeidpkcs11.so";
+            }
+            try
+            {
+                applet_version = int.Parse(GetCardAppletVersion());
+
+                Console.WriteLine($"Applet version: {applet_version}");
+            }
+            catch(Exception e)
+            {
+                throw new Exception("It's not possible to find Applet version (Card too old)");
             }
         }
         public ReadData(String moduleFileName)
@@ -691,7 +704,7 @@ namespace EIDLib
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                dataTest = new ReadData("/usr/lib/pkcs11/beidpkcs11.so");
+                dataTest = new ReadData("libbeidpkcs11.so");
             }
 
             Integrity integrityTest = new Integrity();

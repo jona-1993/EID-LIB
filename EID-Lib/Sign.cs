@@ -53,7 +53,7 @@ namespace EIDLib
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                mFileName = "/usr/lib/pkcs11/beidpkcs11.so";
+                mFileName = "libbeidpkcs11.so";
             }
         }
 
