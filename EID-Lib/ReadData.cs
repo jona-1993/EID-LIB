@@ -46,7 +46,6 @@ namespace EIDLib
     {
         private Module m = null;
         private String mFileName;
-        private int applet_version = 0;
 
         /// <summary>
         /// Default constructor. Will instantiate the beidpkcs11.dll pkcs11 module
@@ -65,21 +64,17 @@ namespace EIDLib
             {
                 mFileName = "libbeidpkcs11.so";
             }
-            try
-            {
-                applet_version = int.Parse(GetCardAppletVersion());
-
-                Console.WriteLine($"Applet version: {applet_version}");
-            }
-            catch(Exception e)
-            {
-                throw new Exception("It's not possible to find Applet version (Card too old)");
-            }
         }
+
+        /// <summary>
+        /// Name of native library (beidpkcs11)
+        /// </summary>
+        /// <param name="moduleFileName"></param>
         public ReadData(String moduleFileName)
         {
             mFileName = moduleFileName;
         }
+
         /// <summary>
         /// Gets the description of the first slot (cardreader) found
         /// </summary>
@@ -160,7 +155,7 @@ namespace EIDLib
         // PARSED DATA
 
         /// <summary>
-        /// Get card number of the owner of the token (eid) in the first non-empty slot (cardreader)
+        /// Get card number of the owner of the token (eid) in the first non-empty slot [HEX] (cardreader)
         /// </summary>
         /// <returns></returns>
         public string GetCardNumber()
@@ -172,9 +167,9 @@ namespace EIDLib
         /// Get chip number of the owner of the token (eid) in the first non-empty slot (cardreader)
         /// </summary>
         /// <returns></returns>
-        public byte[] GetChipNumber()
+        public string GetChipNumber()
         {
-            return Encoding.UTF8.GetBytes("chip_number");
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes("chip_number"));
         }
 
         /// <summary>
@@ -310,13 +305,13 @@ namespace EIDLib
         }
 
         /// <summary>
-        /// Get hash of the photo file of the owner. This is a language specific string
+        /// Get hash of the photo file of the owner. This is a language specific string [HEX (SHA-384)]
         /// More info about the format can be found in the eid specs.
         /// </summary>
         /// <returns></returns>
-        public byte[] GetPhotoHash()
+        public string GetPhotoHash()
         {
-            return Encoding.UTF8.GetBytes("photo_hash");
+            return BytesToHEXStringConverter(Encoding.UTF8.GetBytes("photo_hash"));
         }
 
         /// <summary>

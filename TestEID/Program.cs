@@ -10,7 +10,7 @@ namespace TestEID
         {
             ReadData data = new ReadData();
 
-
+            
             // Parsed from data file
 
             data.GetAndTestIdFile();
@@ -29,7 +29,7 @@ namespace TestEID
 
             Console.WriteLine(data.GetCardNumber());
 
-            var chipNumber = data.GetChipNumber();
+            Console.WriteLine(data.GetChipNumber());
 
             Console.WriteLine(data.GetDateAndCountryOfProtection());
 
@@ -57,7 +57,7 @@ namespace TestEID
 
             Console.WriteLine(data.GetNobility());
 
-            var photohash = data.GetPhotoHash();
+            Console.WriteLine(data.GetPhotoHash());
 
             Console.WriteLine(data.GetRegionalFileNumber());
 
@@ -118,7 +118,7 @@ namespace TestEID
             string ASigner = "Hello World";
 
             var signed = signer.DoSign(Encoding.ASCII.GetBytes(ASigner), "Signature");
-
+            
             var verif = integrity.Verify(Encoding.ASCII.GetBytes(ASigner), signed, data.GetCertificateSignatureFile());*/
 
             Console.ReadLine();
