@@ -49,7 +49,7 @@ namespace EIDLib
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
             {
-                mFileName = "/Library/Belgium Identity Card/Pkcs11/libbeidpkcs11.dylib";
+                mFileName = "libbeidpkcs11.dylib";
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
@@ -138,13 +138,14 @@ namespace EIDLib
             try
             {
                 Slot slot = m.GetSlotList(true)[0];
+
                 if (slot == null)
                 {
-                    Console.WriteLine("No Card reader found");
+                    Console.WriteLine("No card reader found");
                 }
                 if (slot.Token == null)
                 {
-                    Console.WriteLine("No eID Card Found");
+                    Console.WriteLine("No card Found");
                 }
 
                 Session session = slot.Token.OpenSession(true);

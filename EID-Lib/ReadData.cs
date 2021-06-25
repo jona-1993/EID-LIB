@@ -674,6 +674,7 @@ namespace EIDLib
                 else
                 {
                     Console.WriteLine("No card found\n");
+                    throw new Exception("No card found");
                 }
             }
             finally
@@ -776,6 +777,13 @@ namespace EIDLib
             {
                 // Get the first slot (cardreader) with a token
                 Slot[] slotlist = m.GetSlotList(true);
+
+                if (slotlist == null)
+                {
+                    Console.WriteLine("No card reader found");
+                    throw new Exception("No card reader found");
+                }
+
                 if (slotlist.Length > 0)
                 {
                     Slot slot = slotlist[0];
@@ -865,6 +873,14 @@ namespace EIDLib
             {
                 // Get the first slot (cardreader) with a token
                 Slot[] slotlist = m.GetSlotList(true);
+
+                if (slotlist == null)
+                {
+                    Console.WriteLine("No card reader found");
+                    throw new Exception("No card reader found");
+                }
+
+
                 if (slotlist.Length > 0)
                 {
                     Slot slot = slotlist[0];
@@ -891,6 +907,7 @@ namespace EIDLib
                 else
                 {
                     Console.WriteLine("No card found\n");
+                    throw new Exception("No card found");
                 }
             }
             finally
@@ -919,6 +936,14 @@ namespace EIDLib
             {
                 // Get the first slot (cardreader) with a token
                 Slot[] slotlist = m.GetSlotList(true);
+
+                if (slotlist == null)
+                {
+                    Console.WriteLine("No card reader found");
+                    throw new Exception("No card reader found");
+                }
+
+
                 if (slotlist.Length > 0)
                 {
                     Slot slot = slotlist[0];
@@ -944,6 +969,7 @@ namespace EIDLib
                 else
                 {
                     Console.WriteLine("No card found\n");
+                    throw new Exception("No card found");
                 }
             }
             finally
@@ -972,9 +998,17 @@ namespace EIDLib
             {
                 // Get the first slot (cardreader) with a token
                 Slot[] slotlist = m.GetSlotList(true);
+
+                if (slotlist == null)
+                {
+                    Console.WriteLine("No card reader found");
+                    throw new Exception("No card reader found");
+                }
+
                 if (slotlist.Length > 0)
                 {
                     Slot slot = slotlist[0];
+
                     Session session = slot.Token.OpenSession(true);
                     // Search for objects
                     // First, define a search template 
@@ -1000,6 +1034,7 @@ namespace EIDLib
                 else
                 {
                     Console.WriteLine("No card found\n");
+                    throw new Exception("No card found");
                 }
             }
             finally

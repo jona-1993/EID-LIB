@@ -8,8 +8,14 @@ namespace TestEID
     {
         static void Main(string[] args)
         {
+            Settings.SetLanguage(Settings.Language.fr);
+
             ReadData data = new ReadData();
 
+            
+            //System.Security.Cryptography.X509Certificates.X509Certificate2 cert = new System.Security.Cryptography.X509Certificates.X509Certificate2(data.GetCertificateAuthenticationFile());
+            
+            /*
             
             // Parsed from data file
 
@@ -109,17 +115,17 @@ namespace TestEID
             Console.WriteLine(data.GetCardSoftMaskVersion());
 
             //Console.WriteLine(data.GetCardSignature()); // NOT YET AVAILABLE
-
+            */
             // Test electronic signature
 
-            /*Integrity integrity = new Integrity();
+            Integrity integrity = new Integrity();
             Sign signer = new Sign();
 
             string ASigner = "Hello World";
 
             var signed = signer.DoSign(Encoding.ASCII.GetBytes(ASigner), "Signature");
             
-            var verif = integrity.Verify(Encoding.ASCII.GetBytes(ASigner), signed, data.GetCertificateSignatureFile());*/
+            var verif = integrity.Verify(Encoding.ASCII.GetBytes(ASigner), signed, data.GetCertificateSignatureFile());
 
             Console.ReadLine();
         }

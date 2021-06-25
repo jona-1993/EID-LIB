@@ -12,3 +12,8 @@ Works with:
 
 If you would have a build for Windows, you need to build EID-Lib with Windows. (Because I use a preprocessor directive for use 32 bits long types)
 
+For Xamarin Mac, if you have to use the Sandbox mode, you have to edit "Entitlements.plist" with:
+- key: com.apple.security.temporary-exception.files.absolute-path.read-write
+- string value: /usr/local/etc/BEID.conf
+It's for set the language in Settings.SetLanguage. 
+Documentation: https://developer.apple.com/library/archive/documentation/Miscellaneous/Reference/EntitlementKeyReference/Chapters/AppSandboxTemporaryExceptionEntitlements.html
