@@ -11,9 +11,15 @@
     <Description>Cross-Platform library for belgian electronic identity cards</Description> 
     <PackageId>EID-Lib</PackageId> 
     <Copyright>2021</Copyright> 
+    <Platforms>AnyCPU;x64</Platforms> 
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>EID-Lib.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>EID-Lib.xml</DocumentationFile>
   </PropertyGroup>

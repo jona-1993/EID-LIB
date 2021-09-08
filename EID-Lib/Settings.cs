@@ -57,23 +57,71 @@ namespace EIDLib
             }
             else
             {
-                if (File.Exists("/usr/local/etc/BEID.conf"))
+                try
                 {
-                    var config = File.ReadAllText("/usr/local/etc/BEID.conf");
+                    if (File.Exists("/usr/local/etc/BEID.conf"))
+                    {
+                        var config = File.ReadAllText("/usr/local/etc/BEID.conf");
 
-                    Regex reg = new Regex(@"language ?= ?((en)|(fr)|(de)|(nl))");
+                        Regex reg = new Regex(@"language ?= ?((en)|(fr)|(de)|(nl))");
 
-                    config = reg.Replace(config, $"language={Enum.GetName(typeof(Language), language)}");
+                        config = reg.Replace(config, $"language={Enum.GetName(typeof(Language), language)}");
 
-                    File.Delete("/usr/local/etc/BEID.conf");
+                        File.Delete("/usr/local/etc/BEID.conf");
 
-                    File.WriteAllText("/usr/local/etc/BEID.conf", config);
+                        File.WriteAllText("/usr/local/etc/BEID.conf", config);
+                    }
+                    else
+                    {
+                        string config = $"[general]\r\nlanguage={Enum.GetName(typeof(Language), language)}\r\n";
+
+                        File.WriteAllText("/usr/local/etc/BEID.conf", config);
+                    }
                 }
-                else
+                catch(Exception ex)
                 {
-                    string config = $"[general]\r\nlanguage={Enum.GetName(typeof(Language), language)}\r\n";
-                    
-                    File.WriteAllText("/usr/local/etc/BEID.conf", config);
+                    if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                    {
+                        if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/Library/Preferences/BEID.conf"))
+                        {
+                            var config = File.ReadAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/Library/Preferences/BEID.conf");
+
+                            Regex reg = new Regex(@"language ?= ?((en)|(fr)|(de)|(nl))");
+
+                            config = reg.Replace(config, $"language={Enum.GetName(typeof(Language), language)}");
+
+                            File.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/Library/Preferences/BEID.conf");
+
+                            File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/Library/Preferences/BEID.conf", config);
+                        }
+                        else
+                        {
+                            string config = $"[general]\r\nlanguage={Enum.GetName(typeof(Language), language)}\r\n";
+
+                            File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/Library/Preferences/BEID.conf", config);
+                        }
+                    }
+                    else
+                    {
+                        if (File.Exists($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/BEID.conf"))
+                        {
+                            var config = File.ReadAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/BEID.conf");
+
+                            Regex reg = new Regex(@"language ?= ?((en)|(fr)|(de)|(nl))");
+
+                            config = reg.Replace(config, $"language={Enum.GetName(typeof(Language), language)}");
+
+                            File.Delete($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/BEID.conf");
+
+                            File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/BEID.conf", config);
+                        }
+                        else
+                        {
+                            string config = $"[general]\r\nlanguage={Enum.GetName(typeof(Language), language)}\r\n";
+
+                            File.WriteAllText($"{Environment.GetFolderPath(Environment.SpecialFolder.UserProfile)}/.config/BEID.conf", config);
+                        }
+                    }
                 }
             }
         }
