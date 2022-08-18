@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using System.Timers;
 using EIDLib;
 
 namespace TestEID
@@ -12,7 +13,25 @@ namespace TestEID
 
             ReadData data = new ReadData();
 
+            // Identity card detection tests
             
+
+            data.Detect += (output, isPlugged) =>
+            {
+                Console.WriteLine($"{output} => PLUGGED: {isPlugged}");
+
+                if (isPlugged) // Card is plugged
+                {
+                    Console.WriteLine(data.GetFirstnames());
+                    Console.WriteLine(data.GetSurname());
+                    Console.WriteLine(data.GetDateOfBirth());
+                }
+            };
+
+            Console.ReadKey();
+            
+            data.Dispose();
+            data = null;
             //System.Security.Cryptography.X509Certificates.X509Certificate2 cert = new System.Security.Cryptography.X509Certificates.X509Certificate2(data.GetCertificateAuthenticationFile());
             
             /*

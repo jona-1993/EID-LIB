@@ -30,6 +30,7 @@ using Net.Sf.Pkcs11.Objects;
 using Net.Sf.Pkcs11.Wrapper;
 
 using System.Security.Cryptography.X509Certificates;
+using System.Timers;
 using PublicKey = Net.Sf.Pkcs11.Objects.PublicKey;
 
 using U_INT =
@@ -42,8 +43,16 @@ using System.IO;
 
 namespace EIDLib
 {
-    public class ReadData
+    public class ReadData : IDisposable
     {
+        private object locker = new object();
+        private bool IsRead = false;
+        private System.Timers.Timer timer = new Timer(1000);
+        public delegate void Detection(string output, bool IsPlugged);
+        /// <summary>
+        /// Detect if identity card is plugged or no
+        /// </summary>
+        public event Detection Detect;
         private Module m = null;
         private String mFileName;
 
@@ -64,6 +73,52 @@ namespace EIDLib
             {
                 mFileName = "libbeidpkcs11.so";
             }
+            
+            timer.Elapsed += (sender, args) =>
+            {
+                if(Detect != null && System.Threading.Monitor.TryEnter(locker))
+                {
+                    if (IsRead)
+                    {
+                        try
+                        {
+                            GetAndTestIdFile();
+                        }
+                        catch (Exception e)
+                        {
+                            //Console.WriteLine(e);
+                            IsRead = false;
+                            if (Detect != null)
+                                Detect("Identity card unplugged", false);
+                        }
+                    }
+                    else
+                    {
+                        try
+                        {
+                            GetAndTestIdFile();
+                            IsRead = true;
+                            if (Detect != null)
+                                Detect("Identity card plugged", true);
+                        }
+                        catch (Exception e)
+                        {
+                            //Console.WriteLine(e);
+                        }
+                    }
+                    
+                    System.Threading.Monitor.Exit(locker);
+                }
+            };
+            
+            timer.Start();
+        }
+        
+        public void Dispose()
+        {
+            m?.Dispose();
+            timer?.Stop();
+            timer?.Dispose();
         }
 
         /// <summary>

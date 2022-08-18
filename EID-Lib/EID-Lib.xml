@@ -37,6 +37,11 @@
             <param name="leafCertificate">The certificate whose chain will be checked</param>
             <returns>True if the certificate is trusted according to the system settings</returns>
         </member>
+        <member name="E:EIDLib.ReadData.Detect">
+            <summary>
+            Detect if identity card is plugged or no
+            </summary>
+        </member>
         <member name="M:EIDLib.ReadData.#ctor">
             <summary>
             Default constructor. Will instantiate the beidpkcs11.dll pkcs11 module

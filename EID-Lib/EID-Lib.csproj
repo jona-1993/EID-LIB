@@ -9,9 +9,11 @@
     <Company>Offimed</Company> 
     <Product /> 
     <Description>Cross-Platform library for belgian electronic identity cards</Description> 
-    <PackageId>EID-Lib</PackageId> 
+    <PackageId>EID-Lib-x64</PackageId> 
     <Copyright>2021</Copyright> 
     <Platforms>AnyCPU;x64</Platforms> 
+    <PackageProjectUrl></PackageProjectUrl> 
+    <RepositoryUrl>https://github.com/jona-1993/EID-LIB</RepositoryUrl> 
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
