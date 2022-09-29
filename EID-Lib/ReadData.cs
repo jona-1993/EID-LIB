@@ -45,8 +45,13 @@ namespace EIDLib
 {
     public class ReadData : IDisposable
     {
-        private object locker = new object();
-        private bool IsRead = false;
+        private static object locker = new object();
+        private static object lockerSurname = new object();
+        /// <summary>
+        /// If card is plugged (Used by Detection event)
+        /// /!\ if you modify that /!\
+        /// </summary>
+        public bool IsRead = false;
         private System.Timers.Timer timer = new Timer(1000);
         public delegate void Detection(string output, bool IsPlugged);
         /// <summary>
@@ -74,6 +79,19 @@ namespace EIDLib
                 mFileName = "libbeidpkcs11.so";
             }
             
+            try
+            {
+                lock (locker)
+                {
+                    GetSurname();
+                    IsRead = true;
+                }
+            }
+            catch (Exception e)
+            {
+                IsRead = false;
+            }
+            
             timer.Elapsed += (sender, args) =>
             {
                 if(Detect != null && System.Threading.Monitor.TryEnter(locker))
@@ -82,7 +100,7 @@ namespace EIDLib
                     {
                         try
                         {
-                            GetAndTestIdFile();
+                            GetSurname();
                         }
                         catch (Exception e)
                         {
@@ -96,7 +114,7 @@ namespace EIDLib
                     {
                         try
                         {
-                            GetAndTestIdFile();
+                            GetSurname();
                             IsRead = true;
                             if (Detect != null)
                                 Detect("Identity card plugged", true);
@@ -269,7 +287,14 @@ namespace EIDLib
         /// <returns></returns>
         public string GetSurname()
         {
-            return GetData("surname");
+            string ret;
+
+            lock (lockerSurname)
+            {
+                ret = GetData("surname");
+            }
+
+            return ret;
         }
 
         /// <summary>
