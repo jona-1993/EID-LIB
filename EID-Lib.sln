@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.810.0
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32929.385
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EID-Lib", "EID-Lib\EID-Lib.csproj", "{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EID-Lib", "EID-Lib\EID-Lib.csproj", "{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestEID", "TestEID\TestEID.csproj", "{14530F18-2CEB-4F96-972F-6F556BAF1D0F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestEID", "TestEID\TestEID.csproj", "{14530F18-2CEB-4F96-972F-6F556BAF1D0F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,10 +13,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}.Debug|Any CPU.ActiveCfg = Release|Any CPU
 		{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{572DBE15-5F30-44E4-A197-1CAFB0B0D4BE}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14530F18-2CEB-4F96-972F-6F556BAF1D0F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14530F18-2CEB-4F96-972F-6F556BAF1D0F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14530F18-2CEB-4F96-972F-6F556BAF1D0F}.Release|Any CPU.ActiveCfg = Release|Any CPU

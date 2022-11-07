@@ -36,23 +36,25 @@ using PublicKey = Net.Sf.Pkcs11.Objects.PublicKey;
 using U_INT =
 #if Windows
         System.UInt32;
+using System.Threading;
 #else
 		System.UInt64;
 using System.IO;
+using System.Threading;
 #endif
 
 namespace EIDLib
 {
     public class ReadData : IDisposable
     {
-        private static object locker = new object();
-        private static object lockerSurname = new object();
+        private static Mutex locker = null;
+        private static Mutex lockerSurname = null;
         /// <summary>
         /// If card is plugged (Used by Detection event)
         /// /!\ if you modify that /!\
         /// </summary>
         public bool IsRead = false;
-        private System.Timers.Timer timer = new Timer(1000);
+        private System.Timers.Timer timer = new System.Timers.Timer(1000);
         public delegate void Detection(string output, bool IsPlugged);
         /// <summary>
         /// Detect if identity card is plugged or no
@@ -66,6 +68,12 @@ namespace EIDLib
         /// </summary>
         public ReadData()
         {
+            if (locker == null)
+                locker = new Mutex();
+
+            if (lockerSurname == null)
+                lockerSurname = new Mutex();
+
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 mFileName = @"beidpkcs11.dll";
@@ -81,10 +89,19 @@ namespace EIDLib
             
             try
             {
-                lock (locker)
+                //lock (locker)
+                if(locker.WaitOne(10))
                 {
-                    GetSurname();
+                    try
+                    {
+                        GetSurname();
+                    }
+                    catch(Exception e)
+                    { }
+
                     IsRead = true;
+
+                    locker.ReleaseMutex();
                 }
             }
             catch (Exception e)
@@ -94,7 +111,7 @@ namespace EIDLib
             
             timer.Elapsed += (sender, args) =>
             {
-                if(Detect != null && System.Threading.Monitor.TryEnter(locker))
+                if(Detect != null && locker.WaitOne(10))
                 {
                     if (IsRead)
                     {
@@ -124,8 +141,9 @@ namespace EIDLib
                             //Console.WriteLine(e);
                         }
                     }
-                    
-                    System.Threading.Monitor.Exit(locker);
+
+                    locker.ReleaseMutex();
+
                 }
             };
             
@@ -289,9 +307,16 @@ namespace EIDLib
         {
             string ret;
 
-            lock (lockerSurname)
+            try
             {
-                ret = GetData("surname");
+                lockerSurname.WaitOne();
+                {
+                    ret = GetData("surname");
+                }
+            }
+            finally
+            {
+                lockerSurname.ReleaseMutex();
             }
 
             return ret;
